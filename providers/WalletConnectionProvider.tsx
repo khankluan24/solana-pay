@@ -21,7 +21,8 @@ export const WalletConnectionProvider: FC<{ children: ReactNode }> = ({
   const network = WalletAdapterNetwork.Devnet;
 
   // We can also provide a custom RPC endpoint
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  // const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const endpoint = process.env.NEXT_PUBLIC_DEV_API;
 
   const wallets = useMemo(
     () => [
@@ -35,7 +36,7 @@ export const WalletConnectionProvider: FC<{ children: ReactNode }> = ({
   );
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
+    <ConnectionProvider endpoint={endpoint!}>
       <WalletProvider wallets={wallets}>{children}</WalletProvider>
     </ConnectionProvider>
   );

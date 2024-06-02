@@ -14,6 +14,7 @@ import { PublicKey } from "@solana/web3.js";
 import SolanaPayLogo from "components/Images/SolanaPayLogo";
 
 const RECIPIENT = new PublicKey(process.env.NEXT_PUBLIC_RECIPIENT_KEY ?? "");
+const USDC_MINT = new PublicKey(process.env.NEXT_PUBLIC_USDC ?? "");
 
 const WalletConnectionProvider = dynamic<{ children: ReactNode }>(
   () =>
@@ -32,10 +33,11 @@ const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
         <ConfigProvider
           recipient={RECIPIENT}
           label={"Solpay"}
-          symbol="SOL"
+          symbol="USDC"
           icon={<SolanaPayLogo />}
           decimals={9}
           minDecimals={1}
+          splToken={USDC_MINT}
         >
           <PaymentProvider>
             <ThemeProvider attribute="class" defaultTheme="dark">
